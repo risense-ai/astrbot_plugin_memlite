@@ -1,0 +1,24 @@
+name: astrbot_plugin_memlite
+display_name: Memlite 记忆
+short_desc: memlite 因果树本地记忆：自动召回注入、LLM 工具、vault 双向互通。
+desc: |
+  为 AstrBot 接入 [memlite](https://github.com/risense-ai/respire-memlite)（CLI 名 `memlite`）因果树本地记忆库。
+
+  - 每轮按用户消息自动召回（backend bm25/rrf 自动选档 + 短 id + 标题摘要），临时 content part 注入，不污染会话历史；
+  - 四个 LLM 工具：`memlite_recall` / `memlite_show` / `memlite_remember` / `memlite_chain`；
+  - `/memlite` 指令组：help / status / recall / remember / show / forget / tree / chain / sync；
+  - 与 Rust memlite CLI、DSH 插件（dsh-memlite）、memlite-js 共享同一份 JSONL 库；
+  - 敏感内容（口令/密钥/身份证/银行卡/手机号/JWT/PEM）由 CLI 写闸拒绝，文案原样透传；
+  - 引擎缺失、超时或回执异常时一律 fail-open，不阻断聊天。
+
+  引擎是独立的 `memlite` CLI（构建 respire-memlite 或下载二进制），插件不捆绑。
+version: 0.1.0
+author: risense
+repo: https://github.com/risense-ai/astrbot_plugin_memlite
+astrbot_version: ">=4.16,<5"
+tags:
+  - memory
+  - memlite
+  - local-first
+  - causal-tree
+  - obsidian

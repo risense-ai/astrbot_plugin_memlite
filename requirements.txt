@@ -1,0 +1,1 @@
+# 插件仅依赖 AstrBot 自带能力；memlite CLI 是独立 sidecar（非 pip 包）。

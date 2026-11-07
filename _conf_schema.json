@@ -1,0 +1,101 @@
+{
+  "enabled": {
+    "description": "总开关",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后不再自动召回，LLM 工具和 /memlite 指令也会拒绝访问。"
+  },
+  "memlite_path": {
+    "description": "memlite CLI 路径",
+    "type": "string",
+    "default": "",
+    "hint": "留空自动探测 PATH、~/.cargo/bin 等位置。"
+  },
+  "data_dir": {
+    "description": "记忆库目录",
+    "type": "string",
+    "default": "",
+    "hint": "留空走 memlite 默认解析（MEMLITE_DATA > 项目级 > 用户级 ~/memlite-data）。AstrBot 进程 cwd 不固定，建议显式填写。"
+  },
+  "project_prefix": {
+    "description": "项目名前缀",
+    "type": "string",
+    "default": "astrbot",
+    "hint": "scope_mode 非 global 时项目名为 <前缀>:<身份>。"
+  },
+  "scope_mode": {
+    "description": "记忆隔离范围",
+    "type": "string",
+    "default": "global",
+    "options": ["global", "sender", "session"],
+    "labels": ["全局共享", "按发送者隔离", "按会话隔离"],
+    "hint": "global 与 memlite 全家（CLI/DSH）共享同一份库。"
+  },
+  "auto_recall": {
+    "description": "每轮自动召回注入",
+    "type": "bool",
+    "default": true
+  },
+  "recall_limit": {
+    "description": "单次召回条数上限",
+    "type": "int",
+    "default": 5
+  },
+  "min_prompt_chars": {
+    "description": "触发召回的最短消息长度",
+    "type": "int",
+    "default": 2
+  },
+  "budget_chars": {
+    "description": "注入块字符预算",
+    "type": "int",
+    "default": 1200
+  },
+  "max_show_chars": {
+    "description": "show/chain 输出字符上限",
+    "type": "int",
+    "default": 8000
+  },
+  "max_tool_chars": {
+    "description": "工具返回字符上限",
+    "type": "int",
+    "default": 6000
+  },
+  "allow_groups": {
+    "description": "群聊允许记忆",
+    "type": "bool",
+    "default": false,
+    "hint": "默认仅私聊；开启后群内所有成员共享 scope 隔离的记忆。"
+  },
+  "admin_forget": {
+    "description": "forget 仅管理员",
+    "type": "bool",
+    "default": true
+  },
+  "session_rules": {
+    "description": "注入 memlite 使用规则",
+    "type": "bool",
+    "default": true,
+    "hint": "稳定规则放 system prompt（只注入一次标记，不逐轮膨胀）。"
+  },
+  "recall_timeout": {
+    "description": "recall 超时（秒）",
+    "type": "int",
+    "default": 14
+  },
+  "write_timeout": {
+    "description": "写入/同步超时（秒）",
+    "type": "int",
+    "default": 20
+  },
+  "status_timeout": {
+    "description": "状态/读取超时（秒）",
+    "type": "int",
+    "default": 10
+  },
+  "log": {
+    "description": "输出插件日志",
+    "type": "bool",
+    "default": true
+  }
+}
