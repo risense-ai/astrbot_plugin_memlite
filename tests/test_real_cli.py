@@ -13,11 +13,11 @@ import pytest
 from conftest import STUB_MEMLITE, make_event, make_plugin, result_text
 
 REAL_CLI = "/Users/shiningray/projects/risense/respire-memlite/rust/target/release/memlite"
-HAS_REAL = Path(REAL_CLI).is_file() if shutil.which("memlite") is None else True
-REAL = REAL_CLI if Path(REAL_CLI).is_file() else (shutil.which("memlite") or "")
+SKIP_REAL = bool(os.environ.get("MEMLITE_TEST_SKIP_REAL"))
+REAL = shutil.which("memlite") or (REAL_CLI if Path(REAL_CLI).is_file() else "")
 
 pytestmark = pytest.mark.skipif(
-    not (REAL and Path(REAL).is_file()), reason="memlite CLI 不在本机"
+    SKIP_REAL or not (REAL and Path(REAL).is_file()), reason="memlite CLI 不在本机（或 MEMLITE_TEST_SKIP_REAL=1）"
 )
 
 
